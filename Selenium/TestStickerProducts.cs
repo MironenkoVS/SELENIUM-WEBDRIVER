@@ -27,7 +27,7 @@ namespace Tests
         {
             driver.Url = "http://localhost/litecart/";
 
-            var Products = driver.FindElements(By.CssSelector("li.product.column.shadow.hover-light"));
+            var Products = driver.FindElements(By.CssSelector("ul.products li.product"));
             foreach (IWebElement Product in Products)
             {
                 var Stickers = Product.FindElements(By.CssSelector("div.sticker"));
