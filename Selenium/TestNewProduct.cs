@@ -39,9 +39,11 @@ namespace Tests
 
             //General
             driver.FindElement(By.CssSelector("input[name=status][value='1']")).Click();
-            driver.FindElement(By.CssSelector("input[name='name[en]']")).SendKeys("Duck in suit");
+            string name = "Duck in suit";
+            driver.FindElement(By.CssSelector("input[name='name[en]']")).SendKeys(name);
             Random rnd = new Random();
-            driver.FindElement(By.CssSelector("input[name='code']")).SendKeys(rnd.Next(10000,99999).ToString());
+            string code = rnd.Next(10000, 99999).ToString();
+            driver.FindElement(By.CssSelector("input[name='code']")).SendKeys(code);
             driver.FindElement(By.CssSelector("input[name='categories[]'][value='1']")).Click();
             var quantity = driver.FindElement(By.CssSelector("input[name='quantity']"));
             quantity.Clear();
@@ -70,6 +72,12 @@ This proposal is in order to increase the volume, although it is not clear wheth
             driver.FindElement(By.CssSelector("input[name='prices[USD]']")).SendKeys("17");
 
             driver.FindElement(By.CssSelector("button[name=save]")).Click();
+
+            //Проверяем в каталоге
+            var prodlist = driver.FindElements(By.CssSelector("table.dataTable tr.row a")).Where(a => a.Text == name);
+            if (prodlist.Count()<1)
+                Assert.Fail("Ошибка создания продукта");
+
         }
 
         [TearDown]
