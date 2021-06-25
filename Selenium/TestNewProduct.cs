@@ -49,7 +49,8 @@ namespace Tests
             quantity.Clear();
             quantity.SendKeys("100");
             driver.FindElement(By.CssSelector("input[name='new_images[]'")).SendKeys(Path.GetFullPath("../../../duck.png"));
-
+            driver.FindElement(By.CssSelector("input[name=date_valid_from]")).SendKeys("10102002");
+            driver.FindElement(By.CssSelector("input[name=date_valid_to]")).SendKeys("11112030");
 
             //Information
             driver.FindElements(By.CssSelector("ul.index a")).Where(a => a.Text=="Information").First().Click();
